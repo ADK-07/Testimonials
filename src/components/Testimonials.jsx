@@ -1,21 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+const colors = ["bg-amber-200", "bg-yellow-200", "bg-cyan-200"];
+
+const testimonials = [
+  {
+    quote: "This is the product I've ever used!",
+    autor: "Jane Doe",
+  },
+  {
+    quote: "I highly recommend this product to everyone",
+    autor: "John Smith",
+  },
+  {
+    quote: "This product has completely changed my life",
+    autor: "Drake",
+  },
+];
 
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const testimonials = [
-    {
-      quote: "This is the product I've ever used!",
-      autor: "Jane Doe",
-    },
-    {
-      quote: "I highly recommend this product to everyone",
-      autor: "John Smith",
-    },
-    {
-      quote: "This product has completely changed my life",
-      autor: "Drake",
-    },
-  ];
+  const [currentColor, setCurrentColor] = useState("bg-amber-200");
+
+  useEffect(() => {
+    const randomColors = colors[Math.floor(Math.random() * colors.length)];
+    setCurrentColor(randomColors);
+  }, [currentIndex]);
 
   const previousQuote = () =>
     setCurrentIndex(
@@ -28,7 +37,9 @@ const Testimonials = () => {
   return (
     <div className="min-h-screen flex justify-center items-center bg-[#E0C9A6]">
       <div className="flex flex-col gap-3 relative">
-        <div className="max-w-3xl px-6 py-10 bg-amber-200 backdrop:blur-3xl rounded-lg shadow-md ">
+        <div
+          className={`max-w-3xl px-6 py-10 ${currentColor} backdrop:blur-3xl rounded-lg shadow-md `}
+        >
           ❝ {testimonials[currentIndex].quote} ❞
         </div>
         <div className="flex justify-end">
@@ -36,7 +47,7 @@ const Testimonials = () => {
             {testimonials[currentIndex].autor}
           </div>
         </div>
-        <div className="flex gap-3 items-center justify-center">
+        <div className="flex gap-3 items-center justify-center mt-3">
           <button
             onClick={previousQuote}
             className="px-4 py-2 bg-gray-200 shadow-md rounded-md items-center"
