@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 const colors = ["bg-amber-200", "bg-yellow-200", "bg-cyan-200"];
+// you need to declare colors outside because if we declare it inside the component Testimonials  even though colors is a constant array but when we use useEffect it will think that color is changing in different render so we need to add colors in useEffect dependecy to avoid that we need do this
 
 const testimonials = [
   {
